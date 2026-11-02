@@ -60,7 +60,7 @@ namespace Verda
 
             try
             {
-                availVersion = client.DownloadString("http://verda-dl.zz.mu/version");
+                availVersion = client.DownloadString("");
                 availVersion = availVersion.Remove(availVersion.Length - 1);
                 if (availVersion == verdaVersion)
                 {
@@ -234,9 +234,9 @@ namespace Verda
         {
             chosenPreset = presetComboBox.SelectedValue.ToString();
             argRange = presetRangeBox.Text;
-            if (chosenPreset == "http-title") { argConfig = "-T5 -n -Pn -p 80,443 --open --script http-title --stats-every 5s"; }
-            if (chosenPreset == "Webcam") { argConfig = "-T3 -n -Pn -p 80,8080 --open --script http-title --stats-every 5s"; }
-            if (chosenPreset == "Webcam-fast") { argConfig = "-T5 -n -Pn -p 80,8080 --open --script http-title --stats-every 5s"; }
+            if (chosenPreset == "-title") { argConfig = "-T5 -n -Pn -p 80,443 --open --script -title --stats-every 5s"; }
+            if (chosenPreset == "Webcam") { argConfig = "-T3 -n -Pn -p 80,8080 --open --script -title --stats-every 5s"; }
+            if (chosenPreset == "Webcam-fast") { argConfig = "-T5 -n -Pn -p 80,8080 --open --script -title --stats-every 5s"; }
             if (chosenPreset == "Webcam-advanced") { argConfig = "-T5 -n -Pn -p 80,82,83,1010,1614,2000,4002,5000,5900,8003,8028,8080,8081,8082,8888,12122 --open --stats-every 5s"; }
             if (chosenPreset == "custom") { argConfig = customArgTextBox.Text + " "; }
             arguments = argConfig + " " + argRange;
