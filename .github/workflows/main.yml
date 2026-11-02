@@ -1,0 +1,37 @@
+name: Build Verda
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+
+    - name: Restore NuGet packages
+      run: nuget restore Verda.sln
+
+    - name: Build
+      run: msbuild Verda.sln /p:Configuration=Release /p:Platform="Any CPU" /m
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Verda-build
+        path: |
+          **/bin/Release/**
+          **/bin/x86/Release/**
+          **/bin/x64/Release/**
